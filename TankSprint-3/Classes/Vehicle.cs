@@ -11,7 +11,7 @@ namespace TankSprint_3
     class Vehicle : Sprite, IVehicle
     {
         public float Speed { get; set; } = 3f;
-        public float RotationSpeed { get; set; } = 10f;
+        public float RotationSpeed { get; set; } = 3f;
         public Vector2 inputAngle { get; set; } = Vector2.Zero;
         private readonly IInput _input;
 
@@ -64,11 +64,6 @@ namespace TankSprint_3
 
             Direction = new Vector2((float)Math.Cos(MathHelper.ToRadians(90) - Rotation), -(float)Math.Sin(MathHelper.ToRadians(90) - Rotation));
 
-            //var angle = Math.Acos(vector.X / vector.Length());
-            //if (Rotation != (float)angle)
-            //{
-            //    Rotation += MathHelper.ToRadians(0.5f);
-            //}
         }
 
         public override void Update() { }
