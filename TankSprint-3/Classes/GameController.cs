@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -42,7 +43,7 @@ namespace TankSprint_3.Classes
         public void MoveHandler(string x, string y, string username)
         {
             var curTank = Tanks.Find(e => e.Name == username);
-            curTank?.Vehicle.Move(x, y);
+            curTank.Vehicle.inputAngle = new Vector2(int.Parse(x), int.Parse(y));
         }
 
         public void ShootHandler(bool isShooting, string username)

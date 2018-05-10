@@ -52,6 +52,7 @@ namespace TankSprint_3
                 Shoot();
             }
 
+            Vehicle.Move();
         }
 
         public void Draw()

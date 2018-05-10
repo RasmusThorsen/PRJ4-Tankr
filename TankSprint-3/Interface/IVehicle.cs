@@ -14,9 +14,10 @@ namespace TankSprint_3
         Vector2 Direction { get; set; }
         Vector2 Position { get; set; }
         CircleCollider Collider { get; set; }
+        Vector2 inputAngle { get; set; }
         void Update();
         void Draw();
-        void Move(string x, string y);
+        void Move();
         void MoveForward();
     }
 }

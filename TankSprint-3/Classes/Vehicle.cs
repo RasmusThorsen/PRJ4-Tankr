@@ -12,6 +12,7 @@ namespace TankSprint_3
     {
         public float Speed { get; set; } = 3f;
         public float RotationSpeed { get; set; } = 10f;
+        public Vector2 inputAngle { get; set; } = Vector2.Zero;
         private readonly IInput _input;
 
         private Vector2 _position;
@@ -50,25 +51,13 @@ namespace TankSprint_3
             Collider.Center = Position;
         }
 
-        public void Move(string x, string y)
+        public void Move()
         {
-            //var state = Keyboard.GetState();
-            //foreach (var key in state.GetPressedKeys())
-            //{
-            //    Direction = new Vector2((float)Math.Cos(MathHelper.ToRadians(90) - Rotation), -(float)Math.Sin(MathHelper.ToRadians(90) - Rotation));
-            //    if (key == _input.Left) Rotation -= MathHelper.ToRadians(RotationSpeed);
-            //    else if (key == _input.Right) Rotation += MathHelper.ToRadians(RotationSpeed);
-            //    else if (key == _input.Up)
-            //    {
-            //        Position += Direction * Speed;
-            //    }
-            //}
-
-            if (int.Parse(x) > 0)
+            if (inputAngle.X > 0)
             {
                 Rotation += MathHelper.ToRadians(RotationSpeed);
 
-            } else if (int.Parse(x) < 0)
+            } else if (inputAngle.X < 0)
             {
                 Rotation -= MathHelper.ToRadians(RotationSpeed);
             }
