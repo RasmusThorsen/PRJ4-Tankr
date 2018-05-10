@@ -13,7 +13,6 @@ namespace TankSprint_3
         public float Speed { get; set; } = 3f;
         public float RotationSpeed { get; set; } = 3f;
         public Vector2 inputAngle { get; set; } = Vector2.Zero;
-        private readonly IInput _input;
 
         private Vector2 _position;
         public new Vector2 Position
@@ -27,9 +26,8 @@ namespace TankSprint_3
             }
         }
 
-        public Vehicle(IInput input)
+        public Vehicle()
         {
-            _input = input;
             Position = new Vector2(50, 50);
             Collider = new CircleCollider(this);
         }

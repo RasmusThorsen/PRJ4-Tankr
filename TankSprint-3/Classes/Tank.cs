@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using TankSprint_3.Classes;
 
 namespace TankSprint_3
 {
@@ -16,19 +17,19 @@ namespace TankSprint_3
     {
         private ICanon Canon;
         public IVehicle Vehicle; //skal være private
-        private readonly IInput _input;
         public bool isDead;
         public List<IBullet> _bullets = new List<IBullet>(); //skal være private
         public string Name { get; }
         public bool isShooting = false;
         public bool isSpeeding = false;
+        public Stats _stats { get; }
 
-        public Tank(IInput input, string n)
+        public Tank(string n)
         {
-            _input = input;
             Name = n;
+            _stats = new Stats(n);
             Canon = new StandardCanon();
-            Vehicle = new Vehicle(_input);
+            Vehicle = new Vehicle();
         }
 
         public void Update()
@@ -67,7 +68,11 @@ namespace TankSprint_3
         public void Shoot()
         {
             var newBullet = Canon.Shoot(Vehicle.Direction, Vehicle.Position);
-            if(newBullet != null)_bullets.Add(newBullet);
+            if (newBullet != null)
+            {
+                _bullets.Add(newBullet);
+                _stats.NumOfShots++;
+            }
         }
 
     }

@@ -97,7 +97,7 @@ namespace TankSprint_3
 
             if (gm.GameController.GameOver)
             {
-                proxy.Invoke("RoundIsOver",_args[0]);
+                proxy.Invoke("RoundOver","GAMEDATA JIHU",_args[0]);
                 Exit();
             }
 

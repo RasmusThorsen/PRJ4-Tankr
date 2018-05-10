@@ -76,6 +76,7 @@
     <Compile Include="Classes\CollisionController.cs" />
     <Compile Include="Classes\GameController.cs" />
     <Compile Include="Classes\GameMode.cs" />
+    <Compile Include="Classes\Stats.cs" />
     <Compile Include="Interface\IBullet.cs" />
     <Compile Include="Interface\ICanon.cs" />
     <Compile Include="Interface\ICollisionController.cs" />

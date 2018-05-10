@@ -18,7 +18,7 @@ namespace TankSprint_3.Classes
             var tanks = new List<Tank>();
             for (int i = 0; i < int.Parse(args[2]); i++)
             {
-                tanks.Add(new Tank(new WASDInput(), args[3 + i]));
+                tanks.Add(new Tank(args[3 + i]));
             }
             //her sættes tanks alt efter gamemode.
             foreach (var tank in tanks)
