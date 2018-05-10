@@ -20,7 +20,7 @@ namespace TankSprint_3.Classes
             //thr.Start();
         }
 
-        public void CheckCollisions()
+        public void CheckCollisions(string gameID)
         {         
             //while(true) her
             for (int i = 0; i < _tanks.Count; i++)
@@ -36,6 +36,7 @@ namespace TankSprint_3.Classes
                             {
                                 bullet.IsRemoved = true;
                                 currentTank.isDead = true;
+                                TankGame.Hub.Invoke("PlayerDead", _tanks[j].Name, _tanks[i].Name, gameID);
                             }
                         }
                     }

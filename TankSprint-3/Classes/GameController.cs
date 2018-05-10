@@ -14,6 +14,7 @@ namespace TankSprint_3.Classes
         public ICollisionController CollisionController { get; set; }
         public List<Tank> Tanks { get; set; }
         public bool GameOver { get; set; } = false;
+        public string gameID { get; set; }
 
         public GameController(List<Tank> tanks)
         {
@@ -29,7 +30,7 @@ namespace TankSprint_3.Classes
             }
 
             if (Tanks.Count == 1) GameOver = true;
-            CollisionController.CheckCollisions(); //køres i separat tråd?? Ændrer dog på listen i main tråd. spørg henrik!
+            CollisionController.CheckCollisions(gameID); //køres i separat tråd?? Ændrer dog på listen i main tråd. spørg henrik!
         }
 
         public void Draw()

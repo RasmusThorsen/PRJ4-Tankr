@@ -8,6 +8,6 @@ namespace TankSprint_3.Interface
 {
     interface ICollisionController
     {
-        void CheckCollisions();
+        void CheckCollisions(string gameID);
     }
 }

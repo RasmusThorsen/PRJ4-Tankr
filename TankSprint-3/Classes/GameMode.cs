@@ -26,6 +26,7 @@ namespace TankSprint_3.Classes
                 tank.Vehicle.Position = new Vector2(_rand.Next(TankGame.Graphics.PreferredBackBufferWidth), _rand.Next(TankGame.Graphics.PreferredBackBufferHeight));
             }
             GameController = new GameController(tanks);
+            GameController.gameID = args[0];
         }
     }
 }

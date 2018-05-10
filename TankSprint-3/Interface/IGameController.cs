@@ -16,5 +16,6 @@ namespace TankSprint_3.Interface
         void MoveHandler(string x, string y, string username);
         void ShootHandler(bool isShooting, string username);
         void SpeedHandler(bool isSpeeding, string username);
+        string gameID { get; set; }
     }
 }
