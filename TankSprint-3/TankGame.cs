@@ -124,9 +124,9 @@ namespace TankSprint_3
         {
             var hubConnection = new HubConnection("https://tankweb.azurewebsites.net");
             proxy = hubConnection.CreateHubProxy("GameHub");
-            proxy.On<string, string, string>("moveButtonClicked", gm.GameController.MoveHandler);
-            proxy.On<bool, string>("shootButtonClicked", gm.GameController.ShootHandler);
-            proxy.On<bool, string>("speedButtonClicked", gm.GameController.SpeedHandler);
+            proxy.On<string, string, string>("moveCalled", gm.GameController.MoveHandler);
+            proxy.On<bool, string>("shootCalled", gm.GameController.ShootHandler);
+            proxy.On<bool, string>("speedCalled", gm.GameController.SpeedHandler);
             hubConnection.Start().Wait();
             proxy.Invoke("ConnectToGameSession", _args[0]);
         }
