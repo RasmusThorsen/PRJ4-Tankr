@@ -23,6 +23,7 @@ namespace TankSprint_3
         public bool isShooting = false;
         public bool isSpeeding = false;
         public Stats _stats { get; }
+        public bool hasDriven { get; private set; }
 
         public Tank(string n)
         {
@@ -46,6 +47,7 @@ namespace TankSprint_3
             {
                 Vehicle.MoveForward();
                 _stats.Distance++;
+                hasDriven = true;
             }
 
             Canon.CurrentTime += (float)TankGame.GameTime.ElapsedGameTime.TotalSeconds;
@@ -59,6 +61,12 @@ namespace TankSprint_3
 
         public void Draw()
         {
+            if (!hasDriven)
+            {
+                var font = TankGame.GlobalContent.Load<SpriteFont>("Font");
+                TankGame.SpriteBatch.DrawString(font, Name, new Vector2(Vehicle.Position.X - 25, Vehicle.Position.Y + 20), Color.White);
+            }
+
             foreach (var bullet in _bullets)
             {
                 bullet.Draw();

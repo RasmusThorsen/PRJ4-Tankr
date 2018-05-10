@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR.Client;
 using Microsoft.AspNet.SignalR.Client.Hubs;
 using Microsoft.Xna.Framework;
@@ -68,7 +69,6 @@ namespace TankSprint_3
 
             // TODO: use this.Content to load your game content here
             gm.initGame(_args);
-
             ConnectToHub();
         }
 
@@ -99,8 +99,8 @@ namespace TankSprint_3
             if (gm.GameController.GameOver)
             {
                 string statsJSON = JsonConvert.SerializeObject(gm.GameController.Stats);
-
-                proxy.Invoke("RoundOver", statsJSON, gm.GameController.gameID);
+                var task = proxy.Invoke("RoundOver", statsJSON, gm.GameController.gameID);
+                Task.WaitAll(task);
                 Exit();
             }
 

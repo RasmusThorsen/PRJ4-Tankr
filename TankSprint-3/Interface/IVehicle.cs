@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace TankSprint_3
 {
@@ -11,6 +12,7 @@ namespace TankSprint_3
     {
         float Speed { get; set; }
         float RotationSpeed { get; set; }
+        Texture2D Texture { get; set; }
         Vector2 Direction { get; set; }
         Vector2 Position { get; set; }
         CircleCollider Collider { get; set; }

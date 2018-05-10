@@ -11,7 +11,7 @@ namespace TankSprint_3.Classes
         public string UserName { get; }
         public int Kills { get; set; } = 0;
         public int NumOfShots { get; set; } = 0;
-        public int HitRate { get; set; } = 0;
+        public float HitRate { get; set; } = 0;
         public int Distance { get; set; } = 0;
         public int Dead { get; set; } = 0;
         public int Winner { get; set; } = 0;

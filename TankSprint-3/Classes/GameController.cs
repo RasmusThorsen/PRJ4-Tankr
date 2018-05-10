@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Graphics;
 using TankSprint_3.Interface;
 
 namespace TankSprint_3.Classes
@@ -13,7 +15,7 @@ namespace TankSprint_3.Classes
     {
         public ICollisionController CollisionController { get; set; }
         public List<Tank> Tanks { get; set; }
-        public List<Stats> Stats { get; private set; }
+        public List<Stats> Stats { get; private set; } = new List<Stats>();
         public bool GameOver { get; set; } = false;
         public string gameID { get; set; }
 
@@ -34,13 +36,15 @@ namespace TankSprint_3.Classes
             {
                 Tanks[0]._stats.Winner++;
                 Stats.Add(Tanks[0]._stats);
-                foreach(var tank in Stats)
+                foreach (var tank in Stats)
                 {
-                    tank.HitRate = tank.Hit / tank.NumOfShots;
+                    if (tank.NumOfShots != 0)
+                        tank.HitRate = (float)tank.Hit / tank.NumOfShots;
+                    else tank.HitRate = 0;
                 }
                 GameOver = true;
             }
-            CollisionController.CheckCollisions(gameID); //køres i separat tråd?? Ændrer dog på listen i main tråd. spørg henrik!
+            CollisionController.CheckCollisions(gameID);
 
             for(int i = 0; i < Tanks.Count; i++)
             {
@@ -50,7 +54,6 @@ namespace TankSprint_3.Classes
                     Tanks.RemoveAt(i);
                 }
             }
-
         }
 
         public void Draw()
