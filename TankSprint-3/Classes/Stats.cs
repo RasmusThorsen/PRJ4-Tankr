@@ -15,6 +15,7 @@ namespace TankSprint_3.Classes
         public int Distance { get; set; } = 0;
         public int Dead { get; set; } = 0;
         public int Winner { get; set; } = 0;
+        public int Hit { get; set; } = 0;
 
         public Stats(string n) => UserName = n;
     }

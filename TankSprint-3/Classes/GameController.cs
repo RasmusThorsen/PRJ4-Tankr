@@ -13,6 +13,7 @@ namespace TankSprint_3.Classes
     {
         public ICollisionController CollisionController { get; set; }
         public List<Tank> Tanks { get; set; }
+        public List<Stats> Stats { get; private set; }
         public bool GameOver { get; set; } = false;
         public string gameID { get; set; }
 
@@ -29,8 +30,27 @@ namespace TankSprint_3.Classes
                 tank.Update();
             }
 
-            if (Tanks.Count == 1) GameOver = true;
+            if (Tanks.Count == 1)
+            {
+                Tanks[0]._stats.Winner++;
+                Stats.Add(Tanks[0]._stats);
+                foreach(var tank in Stats)
+                {
+                    tank.HitRate = tank.Hit / tank.NumOfShots;
+                }
+                GameOver = true;
+            }
             CollisionController.CheckCollisions(gameID); //køres i separat tråd?? Ændrer dog på listen i main tråd. spørg henrik!
+
+            for(int i = 0; i < Tanks.Count; i++)
+            {
+                if(Tanks[i].isDead)
+                {
+                    Stats.Add(Tanks[i]._stats);
+                    Tanks.RemoveAt(i);
+                }
+            }
+
         }
 
         public void Draw()

@@ -45,6 +45,7 @@ namespace TankSprint_3
             if (isSpeeding)
             {
                 Vehicle.MoveForward();
+                _stats.Distance++;
             }
 
             Canon.CurrentTime += (float)TankGame.GameTime.ElapsedGameTime.TotalSeconds;

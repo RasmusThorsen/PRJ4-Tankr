@@ -37,15 +37,14 @@ namespace TankSprint_3.Classes
                                 bullet.IsRemoved = true;
                                 currentTank.isDead = true;
                                 TankGame.Hub.Invoke("PlayerDead", _tanks[j].Name, _tanks[i].Name, gameID);
+                                currentTank._stats.Dead++;
+                                _tanks[j]._stats.Hit++;
+                                _tanks[j]._stats.Kills++;
                             }
                         }
                     }
                 }
             }
-
-            for (int i = 0; i < _tanks.Count; i++)
-                if (_tanks[i].isDead)
-                    _tanks.RemoveAt(i);
         }
     }
 }

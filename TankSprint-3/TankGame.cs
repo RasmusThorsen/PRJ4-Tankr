@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Newtonsoft.Json;
 using TankSprint_3.Classes;
 using TankSprint_3.Interface;
 
@@ -97,7 +98,9 @@ namespace TankSprint_3
 
             if (gm.GameController.GameOver)
             {
-                proxy.Invoke("RoundOver","GAMEDATA JIHU",_args[0]);
+                string statsJSON = JsonConvert.SerializeObject(gm.GameController.Stats);
+
+                proxy.Invoke("RoundOver", statsJSON, gm.GameController.gameID);
                 Exit();
             }
 

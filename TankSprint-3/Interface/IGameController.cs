@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TankSprint_3.Classes;
 
 namespace TankSprint_3.Interface
 {
@@ -17,5 +18,6 @@ namespace TankSprint_3.Interface
         void ShootHandler(bool isShooting, string username);
         void SpeedHandler(bool isSpeeding, string username);
         string gameID { get; set; }
+        List<Stats> Stats { get; }
     }
 }
