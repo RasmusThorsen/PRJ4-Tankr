@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace TankSprint_3
 {
-    interface IVehicle
+    public interface IVehicle
     {
         float Speed { get; set; }
         float RotationSpeed { get; set; }

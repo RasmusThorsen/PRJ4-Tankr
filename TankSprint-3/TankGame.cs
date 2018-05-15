@@ -99,8 +99,8 @@ namespace TankSprint_3
             if (gm.GameController.GameOver)
             {
                 string statsJSON = JsonConvert.SerializeObject(gm.GameController.Stats);
-                var task = proxy.Invoke("RoundOver", statsJSON, gm.GameController.gameID);
-                Task.WaitAll(task);
+                proxy.Invoke("RoundOver", statsJSON, gm.GameController.gameID).Wait();
+                //Task.WaitAll(task);
                 Exit();
             }
 
@@ -114,7 +114,6 @@ namespace TankSprint_3
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-
             // TODO: Add your drawing code here
             spriteBatch.Begin();
             gm.GameController.Draw();

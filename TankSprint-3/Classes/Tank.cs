@@ -13,9 +13,9 @@ using TankSprint_3.Classes;
 
 namespace TankSprint_3
 {
-    class Tank
+    public class Tank
     {
-        private ICanon Canon;
+        public ICanon Canon;
         public IVehicle Vehicle; //skal være private
         public bool isDead;
         public List<IBullet> _bullets = new List<IBullet>(); //skal være private

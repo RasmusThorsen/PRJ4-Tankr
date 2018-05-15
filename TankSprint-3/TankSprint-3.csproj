@@ -74,6 +74,10 @@
     <Compile Include="Classes\CircleCollider.cs" />
     <Compile Include="Classes\Colliders.cs" />
     <Compile Include="Classes\CollisionController.cs" />
+    <Compile Include="Classes\EnemyBigTurns.cs" />
+    <Compile Include="Classes\EnemyInvertedControls.cs" />
+    <Compile Include="Classes\FriendlyShootSpeed.cs" />
+    <Compile Include="Classes\FriendlySpeedUp.cs" />
     <Compile Include="Classes\GameController.cs" />
     <Compile Include="Classes\GameMode.cs" />
     <Compile Include="Classes\Stats.cs" />
@@ -83,6 +87,7 @@
     <Compile Include="Interface\IGameController.cs" />
     <Compile Include="Interface\IGameMode.cs" />
     <Compile Include="Interface\IInput.cs" />
+    <Compile Include="Interface\IPowerUp.cs" />
     <Compile Include="Interface\IVehicle.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -110,7 +115,9 @@
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <MonoGameContentReference Include="Content\Content.mgcb" />
+    <MonoGameContentReference Include="Content\Content.mgcb">
+      <SubType>Designer</SubType>
+    </MonoGameContentReference>
     <None Include="app.manifest" />
     <None Include="packages.config" />
     <None Include="TankSprint-3_TemporaryKey.pfx" />

@@ -14,6 +14,7 @@ namespace TankSprint_3.Classes
     {
         public IGameController GameController { get; set; }
         private readonly Random _rand = new Random();
+        private int _counter = 0;
         public void initGame(string[] args)
         {
             var tanks = new List<Tank>();
@@ -26,7 +27,7 @@ namespace TankSprint_3.Classes
             {
                 tank.Vehicle.Position = new Vector2(_rand.Next(TankGame.Graphics.PreferredBackBufferWidth), _rand.Next(TankGame.Graphics.PreferredBackBufferHeight-30));
                 tank.Vehicle.Collider.Center = tank.Vehicle.Position;
-                tank.Vehicle.Texture = TankGame.GlobalContent.Load<Texture2D>("Tank");
+                tank.Vehicle.Texture = TankGame.GlobalContent.Load<Texture2D>("Tank-" + _counter++);
             }
             GameController = new GameController(tanks);
             GameController.gameID = args[0];

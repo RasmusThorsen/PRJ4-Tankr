@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace TankSprint_3
 {
-    interface IBullet
+    public interface IBullet
     {
         bool IsRemoved { get; set; }
         float LifeSpan { get; }
