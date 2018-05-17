@@ -15,7 +15,7 @@ namespace TankSprint_3.Classes
     {
         private double _currentTime;
         private Random _rand = new Random();
-        public ICollisionController CollisionController { get; set; }
+        public CollisionController CollisionController { get; set; }
         public List<Tank> Tanks { get; set; }
         public List<IPowerUp> PowerUps = new List<IPowerUp>();
         public List<Stats> Stats { get; private set; } = new List<Stats>();
@@ -26,6 +26,16 @@ namespace TankSprint_3.Classes
         {
             Tanks = tanks;
             CollisionController = new CollisionController(tanks, PowerUps);
+            CollisionController.Collision += (s, e) =>
+            {
+                Tanks.Find(r => r.Name == e.KillerTank)._stats.Hit++;
+                Tanks.Find(r => r.Name == e.KillerTank)._stats.Kills++;
+                Tanks.Find(r => r.Name == e.DeadTank)._stats.Dead++;
+                Tanks.Find(r => r.Name == e.DeadTank).isDead = true;
+                e.Bullet.IsRemoved = true;
+
+                TankGame.Hub.Invoke("PlayerDead", e.KillerTank, e.DeadTank, gameID);
+            };
         }
 
         public void Update()

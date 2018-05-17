@@ -22,15 +22,16 @@ namespace TankSprint_3.Classes
         }
         public void CheckCollisions(string gameID)
         {
-            //Parallel.For(0, _teamRed.Count, i =>
             for (int i = 0; i < _teamRed.Count; i++)
             {
                 for (int j = 0; j < _teamBlue.Count; j++)
                 {
+                    if(_teamRed[i].isDead) continue;
                     foreach (var bullet in _teamBlue[j]._bullets)
                     {
                         if (_teamRed[i].Vehicle.Collider.Intersects(bullet.Collider))
                         {
+                            bullet.IsRemoved = true;
                             var handler = Collision;
                             handler?.Invoke(this, new CollisionEventArgs
                             {
@@ -43,11 +44,11 @@ namespace TankSprint_3.Classes
                 }
             }
 
-            //Parallel.For(0, _teamBlue.Count, i =>
             for (int i = 0; i < _teamBlue.Count; i++)
             {
                 for (int j = 0; j < _teamRed.Count; j++)
                 {
+                    if (_teamBlue[i].isDead) continue;
                     foreach (var bullet in _teamRed[j]._bullets)
                     {
                         if (_teamBlue[i].Vehicle.Collider.Intersects(bullet.Collider))

@@ -13,6 +13,7 @@ namespace TankSprint_3.Classes
     {
         private List<Tank> _tanks;
         private List<IPowerUp> _powerUps;
+        public event EventHandler<Arguments> Collision; 
 
         public CollisionController(List<Tank> tanks, List<IPowerUp> powerUps)
         {
@@ -33,12 +34,20 @@ namespace TankSprint_3.Classes
                         {
                             if (currentTank.Vehicle.Collider.Intersects(bullet.Collider))
                             {
-                                bullet.IsRemoved = true;
-                                currentTank.isDead = true;
-                                TankGame.Hub.Invoke("PlayerDead", _tanks[j].Name, _tanks[i].Name, gameID);
-                                currentTank._stats.Dead++;
-                                _tanks[j]._stats.Hit++;
-                                _tanks[j]._stats.Kills++;
+                                //bullet.IsRemoved = true;
+                                //currentTank.isDead = true;
+                                //TankGame.Hub.Invoke("PlayerDead", _tanks[j].Name, _tanks[i].Name, gameID);
+                                //currentTank._stats.Dead++;
+                                //_tanks[j]._stats.Hit++;
+                                //_tanks[j]._stats.Kills++;
+
+                                var handler = Collision;
+                                handler?.Invoke(this, new Arguments
+                                {
+                                    Bullet = bullet,
+                                    DeadTank = currentTank.Name,
+                                    KillerTank = _tanks[j].Name
+                                });
                             }
                         }
 
@@ -55,5 +64,12 @@ namespace TankSprint_3.Classes
                 }
             }); 
         }
+    }
+
+    public class Arguments
+    {
+        public string KillerTank { get; set; }
+        public string DeadTank { get; set; }
+        public IBullet Bullet { get; set; }
     }
 }

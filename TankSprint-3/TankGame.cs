@@ -24,7 +24,7 @@ namespace TankSprint_3
         static ContentManager _content;
         private string[] _args;
         private static GameTime _gameTime;
-        TeamGameMode gm = new TeamGameMode();
+        private IGameMode gm = new GameMode();
         static IHubProxy proxy;
 
         public static ContentManager GlobalContent => _content;
@@ -42,6 +42,9 @@ namespace TankSprint_3
             graphics.PreferredBackBufferWidth = 1920;
             //Array med ID, Antal spillere, navne på spillere.
             _args = args.Split(';');
+
+            if (_args[1] == "team") gm = new TeamGameMode();
+            else gm = new GameMode();
         }
 
         /// <summary>
@@ -100,7 +103,6 @@ namespace TankSprint_3
             {
                 string statsJSON = JsonConvert.SerializeObject(gm.GameController.Stats);
                 proxy.Invoke("RoundOver", statsJSON, gm.GameController.gameID).Wait();
-                //Task.WaitAll(task);
                 Exit();
             }
 

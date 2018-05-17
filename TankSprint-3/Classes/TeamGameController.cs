@@ -24,7 +24,7 @@ namespace TankSprint_3.Classes
         public bool GameOver { get; set; }
 
         public string gameID { get; set; }
-        public List<Stats> Stats { get; }
+        public List<Stats> Stats { get; } = new List<Stats>();
 
         private Dictionary<string, double> _graveyard = new Dictionary<string, double>();
 
@@ -41,6 +41,8 @@ namespace TankSprint_3.Classes
                 FindTank(e.killerTank)._stats.Hit++;
                 if (e.teamColor == "red") _teamRed.Score++;
                 else _teamBlue.Score++;
+
+                TankGame.Hub.Invoke("PlayerDead", e.killerTank, e.deadTank, gameID);
             };
         }
 
@@ -61,12 +63,13 @@ namespace TankSprint_3.Classes
                 CheckDeadTeamMate(ref _teamBlue);
 
                 UpdateRespawn();
+
             }
         }
 
         private void UpdateRespawn()
         {
-            foreach (var key in _graveyard.Keys)
+            foreach (var key in _graveyard.Keys.ToList())
             {
                 _graveyard[key] -= TankGame.GameTime.ElapsedGameTime.TotalSeconds;
 
@@ -77,7 +80,8 @@ namespace TankSprint_3.Classes
                     tank.Vehicle.Position = new Vector2(_rand.Next(TankGame.Graphics.PreferredBackBufferWidth), _rand.Next(TankGame.Graphics.PreferredBackBufferHeight - 30));
                     tank.Vehicle.Collider.Center = tank.Vehicle.Position;
                     _graveyard.Remove(key);
-                } 
+                    TankGame.Hub.Invoke("RespawnPlayer", key, gameID);
+                }
             }
         }
 
@@ -85,7 +89,7 @@ namespace TankSprint_3.Classes
         {
             foreach (var tank in team.Tanks)
             {
-                if (tank.isDead)
+                if (tank.isDead && !_graveyard.ContainsKey(tank.Name))
                 {
                     tank.Vehicle.Collider.Center = new Vector2(-1000, -1000);
                     tank._stats.Dead++;
@@ -97,7 +101,7 @@ namespace TankSprint_3.Classes
         private void EndGame()
         {
             var winnerTeamTanks = _teamRed.Score == _winningScore ? _teamRed.Tanks : _teamBlue.Tanks;
-            var allTanks = _teamRed.Tanks.Concat(_teamBlue.Tanks);
+            var allTanks = _teamRed.Tanks.Concat(_teamBlue.Tanks).ToList();
 
             foreach (var tank in winnerTeamTanks)
                 tank._stats.Winner++;
@@ -127,6 +131,9 @@ namespace TankSprint_3.Classes
             if (_currentTime < 3) DrawCountDown();
             DrawTanks(_teamRed);
             DrawTanks(_teamBlue);
+            var font = TankGame.GlobalContent.Load<SpriteFont>("Font");
+            TankGame.SpriteBatch.DrawString(font, "Team Red kills: " + _teamRed.Score + "/" + _winningScore + "\n" + "Team Blue kills: " + _teamBlue.Score + "/" + _winningScore, 
+                new Vector2(10, 10), Color.White);
         }
 
         private void DrawTanks(Team team)
