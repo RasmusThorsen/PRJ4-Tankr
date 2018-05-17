@@ -81,6 +81,10 @@
     <Compile Include="Classes\GameController.cs" />
     <Compile Include="Classes\GameMode.cs" />
     <Compile Include="Classes\Stats.cs" />
+    <Compile Include="Classes\Team.cs" />
+    <Compile Include="Classes\TeamCollisionController.cs" />
+    <Compile Include="Classes\TeamGameController.cs" />
+    <Compile Include="Classes\TeamGameMode.cs" />
     <Compile Include="Interface\IBullet.cs" />
     <Compile Include="Interface\ICanon.cs" />
     <Compile Include="Interface\ICollisionController.cs" />
