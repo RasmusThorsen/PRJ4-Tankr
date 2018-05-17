@@ -33,39 +33,60 @@ namespace TankSprint_3.Classes
             _currentTime += TankGame.GameTime.ElapsedGameTime.TotalSeconds;
             if (_currentTime >= 3)
             {
-                foreach (var tank in Tanks)
-                {
-                    tank.Update();
-                }
+                UpdateTanks();
 
                 if (Tanks.Count == 1)
-                {
-                    Tanks[0]._stats.Winner++;
-                    Stats.Add(Tanks[0]._stats);
-                    foreach (var tank in Stats)
-                    {
-                        if (tank.NumOfShots != 0)
-                            tank.HitRate = (float)tank.Hit / tank.NumOfShots;
-                        else tank.HitRate = 0;
-                    }
-                    GameOver = true;
-                }
+                    EndGame();
+
                 CollisionController.CheckCollisions(gameID);
 
-                for (int i = 0; i < Tanks.Count; i++)
-                {
-                    if (Tanks[i].isDead)
-                    {
-                        Stats.Add(Tanks[i]._stats);
-                        Tanks.RemoveAt(i);
-                    }
-                }
+                CheckForDeadTanks();
+
                 SpawnPowerUp();
-                for(int i = 0; i < PowerUps.Count; i++)
+
+                UpdatePowerUps();
+            }
+        }
+
+        private void UpdatePowerUps()
+        {
+            for (int i = 0; i < PowerUps.Count; i++)
+            {
+                if (PowerUps[i].isUsed) PowerUps[i].Update();
+                if (PowerUps[i].isRemoved) PowerUps.RemoveAt(i);
+            }
+        }
+
+        private void CheckForDeadTanks()
+        {
+            for (int i = 0; i < Tanks.Count; i++)
+            {
+                if (Tanks[i].isDead)
                 {
-                    if(PowerUps[i].isUsed) PowerUps[i].Update();
-                    if(PowerUps[i].isRemoved) PowerUps.RemoveAt(i);
+                    Stats.Add(Tanks[i]._stats);
+                    Tanks.RemoveAt(i);
                 }
+            }
+        }
+
+        private void EndGame()
+        {
+            Tanks[0]._stats.Winner++;
+            Stats.Add(Tanks[0]._stats);
+            foreach (var tank in Stats)
+            {
+                if (tank.NumOfShots != 0)
+                    tank.HitRate = (float)tank.Hit / tank.NumOfShots;
+                else tank.HitRate = 0;
+            }
+            GameOver = true;
+        }
+
+        private void UpdateTanks()
+        {
+            foreach (var tank in Tanks)
+            {
+                tank.Update();
             }
         }
 
