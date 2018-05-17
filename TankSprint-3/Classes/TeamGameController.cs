@@ -19,7 +19,7 @@ namespace TankSprint_3.Classes
         private double _respawnTime = 3;
         private Random _rand = new Random();
 
-        public ICollisionController CollisionController { get; set; }
+        public TeamCollisionController CollisionController { get; set; }
         public bool GameOver { get; set; }
 
         public string gameID { get; set; }
@@ -31,6 +31,16 @@ namespace TankSprint_3.Classes
         {
             _teamRed = t1;
             _teamBlue = t2;
+            CollisionController = new TeamCollisionController(_teamRed.Tanks, _teamBlue.Tanks);
+            CollisionController.Collision += (s, e) =>
+            {
+                FindTank(e.deadTank)._stats.Dead++;
+                FindTank(e.deadTank).isDead = true;
+                FindTank(e.killerTank)._stats.Kills++;
+                FindTank(e.killerTank)._stats.Hit++;
+                if (e.teamColor == "red") _teamRed.Score++;
+                else _teamBlue.Score++;
+            };
         }
 
         public void Update()
