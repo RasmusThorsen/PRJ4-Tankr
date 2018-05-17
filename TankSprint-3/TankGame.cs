@@ -24,7 +24,7 @@ namespace TankSprint_3
         static ContentManager _content;
         private string[] _args;
         private static GameTime _gameTime;
-        GameMode gm = new GameMode();
+        TeamGameMode gm = new TeamGameMode();
         static IHubProxy proxy;
 
         public static ContentManager GlobalContent => _content;

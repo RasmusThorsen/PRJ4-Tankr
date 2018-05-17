@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,9 +22,10 @@ namespace TankSprint_3.Classes
         }
         public void CheckCollisions(string gameID)
         {
-            Parallel.For(0, _teamRed.Count, i =>
+            //Parallel.For(0, _teamRed.Count, i =>
+            for (int i = 0; i < _teamRed.Count; i++)
             {
-                for (int j = 0; j < _teamBlue.Count; i++)
+                for (int j = 0; j < _teamBlue.Count; j++)
                 {
                     foreach (var bullet in _teamBlue[j]._bullets)
                     {
@@ -39,11 +41,12 @@ namespace TankSprint_3.Classes
                         }
                     }                   
                 }
-            });
+            }
 
-            Parallel.For(0, _teamBlue.Count, i =>
+            //Parallel.For(0, _teamBlue.Count, i =>
+            for (int i = 0; i < _teamBlue.Count; i++)
             {
-                for (int j = 0; j < _teamRed.Count; i++)
+                for (int j = 0; j < _teamRed.Count; j++)
                 {
                     foreach (var bullet in _teamRed[j]._bullets)
                     {
@@ -59,7 +62,7 @@ namespace TankSprint_3.Classes
                         }
                     }
                 }
-            });
+            }
         }
     }
 

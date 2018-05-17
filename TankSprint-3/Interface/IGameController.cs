@@ -9,7 +9,7 @@ namespace TankSprint_3.Interface
 {
     interface IGameController
     {
-        ICollisionController CollisionController { get; set; }
+        //ICollisionController CollisionController { get; set; }
         bool GameOver { get; set; }
         void Draw();
         void Update();
