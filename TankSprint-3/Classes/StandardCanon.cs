@@ -7,8 +7,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using TankSprint_3.Interface;
 
-namespace TankSprint_3
+namespace TankSprint_3.Classes
 {
     class StandardCanon : ICanon
     {

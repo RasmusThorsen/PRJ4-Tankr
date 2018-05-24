@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace TankSprint_3
+namespace TankSprint_3.Classes
 {
     public abstract class Sprite
     {

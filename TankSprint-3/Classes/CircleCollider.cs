@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 
-namespace TankSprint_3
+namespace TankSprint_3.Classes
 {
     public class CircleCollider
     {

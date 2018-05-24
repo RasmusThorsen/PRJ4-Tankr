@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using TankSprint_3.Classes;
 
 namespace TankSprint_3.Interface
 {

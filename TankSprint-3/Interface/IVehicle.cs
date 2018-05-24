@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using TankSprint_3.Classes;
 
-namespace TankSprint_3
+namespace TankSprint_3.Interface
 {
     public interface IVehicle
     {
