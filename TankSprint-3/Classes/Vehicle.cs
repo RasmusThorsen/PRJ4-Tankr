@@ -59,9 +59,8 @@ namespace TankSprint_3
             {
                 Rotation -= MathHelper.ToRadians(RotationSpeed);
             }
-
-            Direction = new Vector2((float)Math.Cos(MathHelper.ToRadians(90) - Rotation), -(float)Math.Sin(MathHelper.ToRadians(90) - Rotation));
-
+            Direction = new Vector2((float)Math.Cos(MathHelper.ToRadians(90) - Rotation), 
+                                    -(float)Math.Sin(MathHelper.ToRadians(90) - Rotation));
         }
 
         public override void Update() { }

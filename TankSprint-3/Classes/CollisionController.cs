@@ -34,12 +34,6 @@ namespace TankSprint_3.Classes
                         {
                             if (currentTank.Vehicle.Collider.Intersects(bullet.Collider))
                             {
-                                //bullet.IsRemoved = true;
-                                //currentTank.isDead = true;
-                                //TankGame.Hub.Invoke("PlayerDead", _tanks[j].Name, _tanks[i].Name, gameID);
-                                //currentTank._stats.Dead++;
-                                //_tanks[j]._stats.Hit++;
-                                //_tanks[j]._stats.Kills++;
 
                                 var handler = Collision;
                                 handler?.Invoke(this, new Arguments

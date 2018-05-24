@@ -15,10 +15,10 @@ namespace TankSprint_3
 {
     public class Tank
     {
-        public ICanon Canon;
-        public IVehicle Vehicle; //skal være private
+        public ICanon Canon { get; set; }
+        public IVehicle Vehicle { get; set; }
         public bool isDead;
-        public List<IBullet> _bullets = new List<IBullet>(); //skal være private
+        public List<IBullet> _bullets = new List<IBullet>();
         public string Name { get; }
         public bool isShooting = false;
         public bool isSpeeding = false;
